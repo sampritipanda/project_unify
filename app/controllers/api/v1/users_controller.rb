@@ -1,4 +1,5 @@
 class Api::V1::UsersController < ApiController
+  before_action :authenticate_users!, only: [:update]
 
   api :GET, '/v1/users/', 'List of resources: User'
   formats %w(json)
@@ -18,9 +19,7 @@ class Api::V1::UsersController < ApiController
          "profile":"http://localhost:3000/api/v1/users/2"
       }
    ]
-}
-
-)
+  })
 
   def index
     @users = User.all
@@ -35,7 +34,7 @@ class Api::V1::UsersController < ApiController
       "user_name":"Thomas Ochman",
       "created_at":"2016-02-22T17:46:07.045Z"
    }
-})
+  })
 
   def show
     @user = User.find(params[:id])
@@ -89,12 +88,37 @@ class Api::V1::UsersController < ApiController
          }
       }
    ]
-}
+  })
 
-)
+  def create
+    user = User.new(user_params)
+    if user.save
+      render json: user, status: :created
+    else
+      render json: user.errors, status: :unprocessable_entity
+    end
+  end
+
+  def update
+    if current_user == user
+      if user.update_attributes(user_params)
+        render json: user, status: :ok
+      else
+        render json: user.errors, status: :unprocessable_entity
+      end
+    else
+      render json: { message: 'Not authorized update User' }, status: :unauthorized
+    end
+  end
 
   def unify
     @user = User.find(params[:id])
     @unified_users = @user.unify
+  end
+
+  private
+
+  def user_params
+    params.require(:user).permit(:user_name, :email, :password, :password_confirmation, :mentor)
   end
 end

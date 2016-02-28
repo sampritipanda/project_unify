@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.3.0'
+ruby '2.2.0'
 
 gem 'rails', '4.2.5.1'
 gem 'pg'
@@ -17,6 +17,10 @@ gem 'apipie-rails'
 gem 'rack-cors', require: 'rack/cors'
 gem 'acts-as-taggable-on'
 gem 'devise'
+gem 'omniauth'
+gem 'omniauth-gplus'
+gem 'omniauth-facebook'
+gem 'tiddle' # Token based authentication for Rails JSON APIs
 
 group :development, :test do
   gem 'coveralls', require: false
