@@ -21,6 +21,7 @@ gem 'omniauth'
 gem 'omniauth-gplus'
 gem 'omniauth-facebook'
 gem 'tiddle' # Token based authentication for Rails JSON APIs
+gem 'config'
 
 group :development, :test do
   gem 'coveralls', require: false

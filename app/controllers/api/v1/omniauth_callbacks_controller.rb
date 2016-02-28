@@ -1,10 +1,10 @@
 class Api::V1::OmniauthCallbacksController < ApiController
   def callback
-    auth = env['omniauth.params']
+    auth = env['omniauth.auth']
     identity = Identity.find_for_oauth(auth)
 
     if identity.new_record?
-      user = User.from_omniauth
+      user = User.from_omniauth(auth)
       user.identities << identity
       user.save
     else

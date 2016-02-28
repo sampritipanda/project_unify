@@ -1,0 +1,7 @@
+omniauth:
+  facebook:
+    key: '147443865644061'
+    secret: 'cb1d566342451140f693c44d87643014'
+  gplus:
+    key: '396819001014-tkos68ocv8hsmafecjasf82q3tpmjqql.apps.googleusercontent.com'
+    secret: 'hA5jVvuFC96ijVRYzUZ7WLWu'

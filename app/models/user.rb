@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
 
   def self.from_omniauth(auth)
     new do |new_user|
-      new_user.name = auth['info']['name']
+      new_user.user_name = auth['info']['name']
       new_user.email = auth['info']['email']
     end
   end
